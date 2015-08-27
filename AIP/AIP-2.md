@@ -20,3 +20,5 @@ The owner of the avatar can add, remove, incrementRating, decrementRating for an
     
 
 New ratings are added by calling wotUp or wotDown with a previously unrated address. Any rating which changes to 0 is removed to conserve space in the blockchain.
+
+See reference implementation: [contracts/wot.sol](/contracts/wot.sol)
