@@ -42,6 +42,11 @@ Where `"pgp": "<my_public_key>"`, we can provide a message who's body is the add
 
 Simple enough in the context of public-private key systems.
 
-What about the `"img.proof"` property, this is whew convention and the lack of specificity in the avatar spec shows its adaptability.
+What about the `"img.proof"` property, this is where convention and the lack of specificity in the avatar spec shows its adaptability.
 
 We might have an avatar contract that specifies a cool batman image contentHash or url. Which is all well and good, but if someone wanted to visually confirm my identity I can provide a contentHash of a passport photo that someone could compare to me in person to verify I am who I say I am.
+
+So I might have an avatar with the following properties:
+
+    img: "QmdoV7jf12CRDXm1dMK9o3EmvAiu9P6X5PtWvPVz8vadDK" // casual profile image
+    img.proof: "QmREEfyXLDU4Ubdpw22Wf4BH3Dcq3RzHfYf7exn19AUiRh" // identity proof
