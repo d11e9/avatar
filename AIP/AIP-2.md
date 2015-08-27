@@ -2,7 +2,9 @@
 
 Requires: AIP-0, AIP-1
 
-Web of trust, an avatar conforming to this spec should have a property "wot" of which the value is the address of a WoT contracts.
+Web of trust, an avatar conforming to this spec should have a property `"wot"` of which the value is the address of a WoT contracts ie:
+
+    wot: "0xMyWoTContractAddress"
 
 WoT contract is linked list indexable by address containing a rating uint.
 
