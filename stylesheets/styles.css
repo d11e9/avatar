@@ -253,3 +253,8 @@ footer {
     color:#444;
   }
 }
+
+
+header h1 {
+  text-align: center;
+}
