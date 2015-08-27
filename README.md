@@ -8,7 +8,7 @@ An avatar contract at its base is a store of arbitrary structured data that conf
 
 [Avatar Improvement Proposals (AIP)](/AIP) are specified in order to standardize and improve avatars in a way that allows freedom of choice, interoperability and fosters discussion. The first of which (AIP-0)defines the basic operations of an Avatar.
 
-* [AIP-0](/AIP/AIP-0.md) Genisis
+* [AIP-0](/AIP/AIP-0.md) Genesis
 * [AIP-1](/AIP/AIP-1.md) Contract Extentions
 * [AIP-2](/AIP/AIP-2.md) Web of Trust
 
