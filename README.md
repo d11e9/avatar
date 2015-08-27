@@ -1,3 +1,5 @@
+![Avatar](/avatar.svg)
+
 #Avatar
 
 Ethereum contract that merges the functionality of [keybase.io](https://keybase.io) and [Gravatar](https://en.wikipedia.org/wiki/Gravatar) in an open and decentralised manner.
