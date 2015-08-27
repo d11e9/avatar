@@ -33,17 +33,6 @@ contract keyvalue is owned {
     }
 }
 
-contract Avatar is keyvalue { }
+contract Avatar is keyvalue {
 
-contract AvatarFactory {
-    
-    address[] public avatars;
-    
-    function create () returns( address contractAddress ) {
-        Avatar avatar = new Avatar();
-        avatar.transfer( msg.sender );
-        avatars.length++;
-        avatars[avatars.length] = address(avatar);
-        return address(avatar);
-    }
 }
