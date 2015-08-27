@@ -1,4 +1,4 @@
-![Avatar](/avatar.svg)
+![Avatar](/avatar.png)
 
 #Avatar
 
