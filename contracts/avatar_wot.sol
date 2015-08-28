@@ -54,7 +54,7 @@ contract LinkedListAddressInt is owned, mortal {
     
     modifier exist (address id, bool flag) { if ((items[id].value != 0 ) == flag) _ }
 
-    function add (address addr, int value) exist(addr, false) internal {
+    function add (address addr, int value) exist(addr, false) internal returns(int) {
         address prev = head;
         items[prev].next = addr;
         items[addr] = Item( true, prev, address(0), value );
@@ -62,6 +62,7 @@ contract LinkedListAddressInt is owned, mortal {
         length++;
         
         if (tail == address(0)) { tail = addr; }
+        return value;
     }
     
     function remove(address addr) exist(addr, true) internal {
@@ -146,12 +147,9 @@ contract LinkedListAddressAddress is owned, mortal {
     function getHead () constant returns (address) { return head; }
     function getTail () constant returns (address) { return tail; }
     function getLength () constant returns (uint) { return length; }
-    function getItem(address id) constant returns(address[] item) {
-        item[0] = items[id].prev;
-        item[1] = items[id].next;
-        item[2] = items[id].value;
-        return item;
-    }
+    function getItem(address id) constant returns(address) { return items[id].value; }
+    function getItemNext(address id) constant returns(address) { return items[id].next; }
+    function getItemPrev(address id) constant returns(address) { return items[id].prev; }
     
     modifier exist (address id, bool flag) { if (items[id].exists == flag) _ }
     
@@ -163,7 +161,7 @@ contract LinkedListAddressAddress is owned, mortal {
         length++;
         
         if (tail == address(0)) { tail = addr; }
-        return addr;
+        return value;
     }
     
     function remove(address addr) exist(addr, true) internal returns(bool) {
