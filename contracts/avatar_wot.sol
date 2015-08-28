@@ -1,16 +1,9 @@
 contract owned {
     address owner;
     function owned() { owner = msg.sender; }
-    function transfer(address to) returns (bool success){
-        if (isOwner()) {
-            owner = to;
-            return true;
-        } else {
-            return false;
-        }
-    }
-    function isOwner () internal returns(bool) {
-        return msg.sender == owner;
+    function transfer(address to) onlyowner returns (bool success){
+        owner = to;
+        return true;
     }
     
     modifier onlyowner { if (msg.sender == owner) _ }
@@ -47,18 +40,20 @@ contract LinkedListAddressInt is owned, mortal {
         int value;
     }
     
-    address public head;
-    address public tail;
-    uint public length;
-    mapping( address => Item) public items;
+    address head;
+    address tail;
+    uint length;
+    mapping( address => Item) items;
+    
+    function getHead () constant returns (address) { return head; }
+    function getTail () constant returns (address) { return tail; }
+    function getLength () constant returns (uint) { return length; }
+    function getItem(address id) constant returns(int) { return items[id].value; }
+    function getItemNext(address id) constant returns(address) { return items[id].next; }
+    function getItemPrev(address id) constant returns(address) { return items[id].prev; }
     
     modifier exist (address id, bool flag) { if ((items[id].value != 0 ) == flag) _ }
-    
-    function LinkedListAddressInt(){
-        tail = address(0);
-        tail = address(0);
-        length = 0;
-    }
+
     function add (address addr, int value) exist(addr, false) internal {
         address prev = head;
         items[prev].next = addr;
@@ -125,10 +120,11 @@ contract WoT is LinkedListAddressInt {
 
 
 contract Avatar is keyvalue {
-    function Avatar(){
+    function createWoT() onlyowner returns(address wotContractAddress) {
         WoT wot = new WoT();
         wot.transfer( msg.sender );
         set( "wot", address(wot) );
+        return address(wot);
     }
 }
 
@@ -197,7 +193,7 @@ contract LinkedListAddressAddress is owned, mortal {
 
 contract AvatarAggregator is LinkedListAddressAddress {
     
-    function create () returns(address contractAddress) {
+    function createAvatar () returns(address contractAddress) {
         Avatar avatar = new Avatar();
         avatar.transfer( msg.sender );
         return add( msg.sender, address(avatar) );
