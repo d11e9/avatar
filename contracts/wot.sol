@@ -41,7 +41,6 @@ contract LinkedListAddressInt is owned, mortal {
     uint public length;
     mapping( address => Item) public items;
     
-    
     modifier exist (address id, bool flag) { if ((items[id].value != 0 ) == flag) _ }
     
     function LinkedListAddressInt(){
