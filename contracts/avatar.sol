@@ -21,7 +21,10 @@ contract owned {
 }
 
 contract mortal is owned {
-    function kill() onlyowner { suicide(owner); }
+    function kill() onlyowner returns (bool){
+        suicide(owner);
+        return true;
+    }
 }
 
 contract keyvalue is owned {
