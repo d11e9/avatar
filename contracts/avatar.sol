@@ -59,7 +59,7 @@ contract LinkedListAddressAddress is owned, mortal {
         tail = address(0);
         length = 0;
     }
-    function add (address addr, address value) exist(addr, false) internal {
+    function add (address addr, address value) exist(addr, false) internal returns(address) {
         address prev = head;
         items[prev].next = addr;
         items[addr] = Item( true, prev, address(0), value );
@@ -67,9 +67,10 @@ contract LinkedListAddressAddress is owned, mortal {
         length++;
         
         if (tail == address(0)) { tail = addr; }
+        return addr;
     }
     
-    function remove(address addr) exist(addr, true) internal {
+    function remove(address addr) exist(addr, true) internal returns(bool) {
         if (head == addr) {
             head = items[addr].prev;
         }
@@ -89,26 +90,24 @@ contract LinkedListAddressAddress is owned, mortal {
         length--;
         
         delete items[addr];
-        
+        return true;
     }
-    
 }
 
 
 contract AvatarAggregator is LinkedListAddressAddress {
     
-    function create () returns( address contractAddress ) {
+    function create () returns(address contractAddress) {
         Avatar avatar = new Avatar();
         avatar.transfer( msg.sender );
-        add( msg.sender, address(avatar) );
-        return address(avatar);
+        return add( msg.sender, address(avatar) );
     }
     
-    function register (address avatar) returns (bool success) {
-        add( msg.sender, address(avatar) );
+    function register (address avatar) returns (address contractAddress) {
+        return add( msg.sender, address(avatar) );
     }
 
-    function deregister () {
-        remove( msg.sender );
+    function deregister () returns (bool success){
+        return remove( msg.sender );
     }
 }
