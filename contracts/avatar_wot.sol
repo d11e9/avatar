@@ -154,9 +154,8 @@ contract LinkedListAddressAddress is owned, mortal {
     modifier exist (address id, bool flag) { if (items[id].exists == flag) _ }
     
     function add (address addr, address value) exist(addr, false) internal returns(address) {
-        address prev = head;
-        items[prev].next = addr;
-        items[addr] = Item( true, prev, address(0), value );
+        items[head].next = addr;
+        items[addr] = Item( true, head, address(0), value );
         head = addr;
         length++;
         
