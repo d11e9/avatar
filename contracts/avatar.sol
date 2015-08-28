@@ -9,11 +9,11 @@ contract owned {
             return false;
         }
     }
-    function isOwner () returns(bool) {
+    function isOwner () constant returns(bool) {
         return msg.sender == owner;
     }
     
-    function isOwner (address addr) returns(bool) {
+    function isOwner (address addr) constant returns(bool) {
         return addr == owner;
     }
     
@@ -27,8 +27,12 @@ contract mortal is owned {
     }
 }
 
-contract keyvalue is owned {
-    mapping (bytes32 => string) public keys;
+contract keyvalue is owned, mortal {
+    mapping (bytes32 => string) keys;
+    
+    function get(bytes32 key) constant returns (string) {
+        return keys[key];
+    }
     function set(bytes32 key, string value) onlyowner returns(string) {
         keys[key] = value;
         return keys[key];
@@ -49,11 +53,20 @@ contract LinkedListAddressAddress is owned, mortal {
         address value;
     }
     
-    address public head;
-    address public tail;
-    uint public length;
-    mapping( address => Item) public items;
+    address head;
+    address  tail;
+    uint length;
+    mapping( address => Item) items;
     
+    function getHead () constant returns (address) { return head; }
+    function getTail () constant returns (address) { return tail; }
+    function getLength () constant returns (uint) { return length; }
+    function getItem(address id) constant returns(address[] item) {
+        item[0] = items[id].prev;
+        item[1] = items[id].next;
+        item[2] = items[id].value;
+        return item;
+    }
     
     modifier exist (address id, bool flag) { if (items[id].exists == flag) _ }
     
