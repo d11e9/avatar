@@ -30,6 +30,7 @@ contract mortal is owned {
 contract LinkedListAddressInt is owned, mortal {
     
     struct Item {
+        bool exists;
         address prev;
         address next;
         int value;
@@ -43,7 +44,7 @@ contract LinkedListAddressInt is owned, mortal {
     
     modifier exist (address id, bool flag) { if ((items[id].value != 0 ) == flag) _ }
     
-    function LinkedList(){
+    function LinkedListAddressInt(){
         tail = address(0);
         tail = address(0);
         length = 0;
@@ -51,7 +52,7 @@ contract LinkedListAddressInt is owned, mortal {
     function add (address addr, int value) exist(addr, false) internal {
         address prev = head;
         items[prev].next = addr;
-        items[addr] = Item( prev, address(0), value );
+        items[addr] = Item( true, prev, address(0), value );
         head = addr;
         length++;
         
@@ -80,20 +81,34 @@ contract LinkedListAddressInt is owned, mortal {
         delete items[addr];
         
     }
-    
 }
 
 
 contract WoT is LinkedListAddressInt {
 
-    function up (address id) onlyowner {
-      items[id].value++;
+    function up (address id) onlyowner returns (int rating) {
+      if (items[id].exists) {
+          items[id].value++;
+      } else {
+          add( id, 1 );
+      }
+      return items[id].value;
     }
-    function down (address id) onlyowner{
-      items[id].value--;
+    function down (address id) onlyowner returns (int rating) {
+      if (items[id].exists) {
+          items[id].value--;
+      } else {
+          add( id, -1 );
+      }
+      return items[id].value;
     }
-    function set (address id, int value) onlyowner {
-      items[id].value = value;
+    function set (address id, int value) onlyowner returns (int rating) {
+      if (items[id].exists) {
+          items[id].value = value;
+      } else {
+          add( id, value );
+      }
+      return items[id].value;
     }
 
 }
