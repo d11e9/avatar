@@ -6,7 +6,7 @@ Web of trust, an avatar conforming to this spec should have a property `"wot"` o
 
     wot: "0xd9d3c812c9b508da606ff5b0945d9af5385d47e5"
 
-WoT contract is linked list indexable by address containing a rating uint.
+WoT contract is linked list indexable by address containing a rating `int`.
 
 The owner of the avatar can add, remove, incrementRating, decrementRating for an arbitrary set of addresses, while these can be arbitrary eth accounts or contract addresses, it is assumed that in the basic case this will be the contact address of other avatars.
 
