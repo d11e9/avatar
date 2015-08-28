@@ -54,11 +54,6 @@ contract LinkedListAddressAddress is owned, mortal {
     
     modifier exist (address id, bool flag) { if (items[id].exists == flag) _ }
     
-    function LinkedList(){
-        tail = address(0);
-        tail = address(0);
-        length = 0;
-    }
     function add (address addr, address value) exist(addr, false) internal returns(address) {
         address prev = head;
         items[prev].next = addr;
