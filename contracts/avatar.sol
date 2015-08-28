@@ -26,8 +26,9 @@ contract mortal is owned {
 
 contract keyvalue is owned {
     mapping (bytes32 => string) public keys;
-    function set(bytes32 key, string value) onlyowner {
+    function set(bytes32 key, string value) onlyowner returns(string) {
         keys[key] = value;
+        return keys[key];
     }
 }
 
@@ -39,6 +40,7 @@ contract Avatar is keyvalue {
 contract LinkedListAddressAddress is owned, mortal {
     
     struct Item {
+        bool exists;
         address prev;
         address next;
         address value;
@@ -50,7 +52,7 @@ contract LinkedListAddressAddress is owned, mortal {
     mapping( address => Item) public items;
     
     
-    modifier exist (address id, bool flag) { if ((items[id].value != address(0) ) == flag) _ }
+    modifier exist (address id, bool flag) { if (items[id].exists == flag) _ }
     
     function LinkedList(){
         tail = address(0);
@@ -60,7 +62,7 @@ contract LinkedListAddressAddress is owned, mortal {
     function add (address addr, address value) exist(addr, false) internal {
         address prev = head;
         items[prev].next = addr;
-        items[addr] = Item( prev, address(0), value );
+        items[addr] = Item( true, prev, address(0), value );
         head = addr;
         length++;
         
