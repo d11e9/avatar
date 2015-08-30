@@ -20,7 +20,6 @@ Aggregators are registry contracts that store reference to individual avatar con
 
 The first such aggregator acts as an AvatarFactory allowing users to either create their own Avatars or register existing avatars.
 
-This contract was mined in block [#155691](https://explorer.etherapps.info/block/155691) and is at address: `0x2c62c7b5fd245fa08cb8bd2fff4417eb3efe2aae` 
   
 
 
