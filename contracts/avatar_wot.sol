@@ -22,13 +22,10 @@ contract keyvalue is owned, mortal {
     function get(bytes32 key) constant returns (bytes32) {
         return keys[key];
     }
+    
     function set(bytes32 key, bytes32 value) onlyowner returns(bytes32) {
         keys[key] = value;
         return keys[key];
-    }
-    
-    function set(bytes32 key, address val) onlyowner returns(bytes32) {
-        return set( key, bytes32(val) );
     }
 }
 contract LinkedListAddressInt is owned, mortal {
@@ -40,17 +37,13 @@ contract LinkedListAddressInt is owned, mortal {
         int value;
     }
     
-    address head;
-    address tail;
-    uint length;
-    mapping( address => Item) items;
+    address public head;
+    address public tail;
+    uint public length;
+    mapping( address => Item) public items;
     
-    function getHead () constant returns (address) { return head; }
-    function getTail () constant returns (address) { return tail; }
-    function getLength () constant returns (uint) { return length; }
-    function getItem(address id) constant returns(int) { return items[id].value; }
-    function getItemNext(address id) constant returns(address) { return items[id].next; }
-    function getItemPrev(address id) constant returns(address) { return items[id].prev; }
+    function next(address id) constant returns(address) { return items[id].next; }
+    function prev(address id) constant returns(address) { return items[id].prev; }
     
     modifier exist (address id, bool flag) { if ((items[id].value != 0 ) == flag) _ }
 
@@ -121,12 +114,7 @@ contract WoT is LinkedListAddressInt {
 
 
 contract Avatar is keyvalue {
-    function createWoT() onlyowner returns(address wotContractAddress) {
-        WoT wot = new WoT();
-        wot.transfer( msg.sender );
-        set( "wot", address(wot) );
-        return address(wot);
-    }
+    
 }
 
 
@@ -139,17 +127,13 @@ contract LinkedListAddressAddress is owned, mortal {
         address value;
     }
     
-    address head;
-    address  tail;
-    uint length;
-    mapping( address => Item) items;
+    address public head;
+    address public tail;
+    uint public length;
+    mapping( address => Item) public items;
     
-    function getHead () constant returns (address) { return head; }
-    function getTail () constant returns (address) { return tail; }
-    function getLength () constant returns (uint) { return length; }
-    function getItem(address id) constant returns(address) { return items[id].value; }
-    function getItemNext(address id) constant returns(address) { return items[id].next; }
-    function getItemPrev(address id) constant returns(address) { return items[id].prev; }
+    function next(address id) constant returns(address) { return items[id].next; }
+    function prev(address id) constant returns(address) { return items[id].prev; }
     
     modifier exist (address id, bool flag) { if (items[id].exists == flag) _ }
     
@@ -194,6 +178,12 @@ contract AvatarAggregator is LinkedListAddressAddress {
         Avatar avatar = new Avatar();
         avatar.transfer( msg.sender );
         return add( msg.sender, address(avatar) );
+    }
+    
+    function createWoT() onlyowner returns(address wotContractAddress) {
+        WoT wot = new WoT();
+        wot.transfer( msg.sender );
+        return address(wot);
     }
     
     function register (address avatar) returns (address contractAddress) {
