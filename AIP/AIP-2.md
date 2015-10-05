@@ -1,7 +1,5 @@
 #AIP-2
 
-~~Previously [AIP-2 WoT]()~~: retired
-
 Requires: AIP-0
 
 Private properties, an avatar conforming to this spec allows key values to be encypted or hashed, overand above the default (defined in AIP-0) plain text. This allows property values to be revealed out of band but to be verifiable on chain.
