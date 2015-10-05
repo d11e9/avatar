@@ -12,7 +12,7 @@ An avatar contract at its base is a store of arbitrary structured data that conf
 
 * [AIP-0](/AIP/AIP-0.md) Genesis
 * [AIP-1](/AIP/AIP-1.md) Contract Extentions
-* [AIP-2](/AIP/AIP-2.md) Web of Trust
+* [AIP-2](/AIP/AIP-2.md) Private Properties
 
 ##Aggregators
 
