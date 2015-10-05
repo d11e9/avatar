@@ -1,24 +1,16 @@
 #AIP-2
 
-Requires: AIP-0, AIP-1
+Previously prepreciated: [AIP-2 WoT]()
 
-Web of trust, an avatar conforming to this spec should have a property `"wot"` of which the value is the address of a WoT contracts ie:
+Requires: AIP-0
 
-    wot: "0xd9d3c812c9b508da606ff5b0945d9af5385d47e5"
+Private properties, an avatar conforming to this spec allows key values to be encypted or hashed, overand above the default (defined in AIP-0) plain text. This allows property values to be revealed out of band but to be verifiable on chain.
 
-WoT contract is linked list indexable by address containing a rating `int`.
+    "username": "d11e9"
+    "name": "Doug A."
 
-The owner of the avatar can add, remove, incrementRating, decrementRating for an arbitrary set of addresses, while these can be arbitrary eth accounts or contract addresses, it is assumed that in the basic case this will be the contact address of other avatars.
 
-    contract WoT is owned, mortal, LinkedListAddressInt {
-        // inherits all the methods and properties of a LinkedList( address => int )
-        // where only constant methods and values are public.
-        function up (address id) {...}
-        function down (address id) {...}
-        function set (address id, int value) {...}
-    }
-    
-
-New ratings are added by calling wotUp or wotDown with a previously unrated address. Any rating which changes to 0 is removed to conserve space in the blockchain.
-
-See reference implementation: [contracts/wot.sol](/contracts/wot.sol) The address used in the example above was created using that contract, and cost 0.04146240000000034 ether to deploy in block #155161 (Fri Aug 28 2015 05:08:35 GMT-0500 (CDT))
+    "username": "d11e9"
+    "name": "0xfeaddeadbeef2015"
+    "name.hashed": "true"
+    "name.encrypted": "true"
