@@ -1,6 +1,6 @@
 #AIP-2
 
-Previously prepreciated: [AIP-2 WoT]()
+~~Previously [AIP-2 WoT]()~~: retired: 
 
 Requires: AIP-0
 
