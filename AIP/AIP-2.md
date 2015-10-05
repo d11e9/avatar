@@ -1,6 +1,6 @@
 #AIP-2
 
-~~Previously [AIP-2 WoT]()~~: retired: 
+~~Previously [AIP-2 WoT]()~~: retired
 
 Requires: AIP-0
 
